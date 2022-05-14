@@ -1,0 +1,215 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="RopeyDVDs.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<title>
+    <asp:ContentPlaceHolder ID="title" runat="server">
+            
+    </asp:ContentPlaceHolder>
+</title>
+<link href="Styles/main.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+<asp:ContentPlaceHolder ID="head" runat="server">
+</asp:ContentPlaceHolder>
+</head>
+<body>
+    <div>
+               
+        </div>
+
+<form id="form1" runat="server">
+    <div class="wrapper">      
+    <div class="menu">
+           
+        <ul>
+                <% if (Session["UserName"] != null)
+                    {
+                        LabelUsername.Text = "Welcome, " + Session["UserName"].ToString(); %>
+                    <li style="float:right"> <a href="ConfirmLogout.aspx">Logout</a></li>
+                    <li class="navigation_first-item"><a href="Default.aspx">Home</a></li>
+                        <li><a href="#" >About<i class="fa fa-angle-down" style="padding:2px; margin-left:2px"></i></a>
+                                <ul>
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Contact us</a></li>
+                        
+                                </ul>
+                        </li>
+                  
+                    <asp:Label ID="LabelUsername" runat="server" style="float:right; font-size: 13px;
+                        font-weight: bold;
+                     
+                        padding: 20px;
+                        color: rgb(255,255,255);
+                        text-decoration: none; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" Text="" ></asp:Label>
+                       
+                       
+            <% }
+            else { %>
+                        
+                <li class="navigation_first-item"><a href="Default.aspx">Home</a></li>
+                <li><a href="#" >About<i class="fa fa-angle-down" style="padding:2px; margin-left:2px"></i></a>
+                                <ul>
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Contact us</a></li>
+                        
+                                </ul>
+                        </li>
+                <li style="float:right"><a href="LoginForm.aspx">Login</a></li>
+                
+
+            <% } %>
+                
+        <%--    user verification--%>
+            <% 
+                if (Session["User_Role"] == null)
+                { %>
+                                        
+                    <li><a href="AllMovies.aspx" >All Movies<i class="fa fa-angle-down" style="padding:2px; margin-left:2px"></i></a></li>
+                    <% 
+                    } else if (Session["User_Role"] != null)
+                    {
+                        int userRole = Convert.ToInt32(Session["User_Role"]);
+                    %>
+                        <%
+                            if (userRole == 1)
+                            {%>
+                                <li><a href="#" >Movies<i class="fa fa-angle-down" style="padding:2px; margin-left:2px"></i></a>
+                                <ul>
+                                    <li><a href="AddActors2.aspx">View Actors</a></li>
+                                    <li><a href="AddProducer2.aspx">View Producers</a></li>
+                                    <li><a href="AddStudio2.aspx">View Studios</a></li>
+                                    <li><a href="AllMovies.aspx">All Movies</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#" >Member<i class="fa fa-angle-down" style="padding:2px; margin-left:2px"></i></a>
+                                <ul>
+                                    <li><a href="AddMember2.aspx">View Members</a></li>
+                                    <li><a href="AddMembershipCategory2.aspx">View Categories</a></li>
+                        
+                                </ul>
+                            </li>
+
+                                <%--<li><a href="#" >Stock<i class="fa fa-angle-down" style="padding:2px; margin-left:2px"></i></a>
+                                <ul>
+                                    <li><a href="AddDVDStock.aspx">Add/View Stock</a></li>
+                       
+                        
+                                </ul>
+                            </li>--%>
+
+                                <li><a href="#" >Loan<i class="fa fa-angle-down" style="padding:2px; margin-left:2px"></i></a>
+                                <ul>
+                                    <li><a href="LoanHistory.aspx">Loan History</a></li>
+                                    <li><a href="LoanType2.aspx"> Loan Types</a></li>
+                                    <li><a href="AddDVDStock2.aspx">Issue Loans</a></li>
+                                    <li><a href="Report7.aspx">Return DVD</a></li>
+                        
+                                </ul>
+                            </li>
+
+                                <li><a href="#" >Reports<i class="fa fa-angle-down" style="padding:2px; margin-left:2px"></i></a>
+                                <ul>
+                                    <li><a href="Report3.aspx">Report 3</a></li>
+                                    <li><a href="Report5.aspx">Report 5</a></li>
+                                    <li><a href="Report8.aspx">Report 8</a></li>
+                                        <li><a href="Report10.aspx">Report 10</a></li>
+                                        <li><a href="Report11.aspx">Report 11</a></li>
+                                        <li><a href="Report12.aspx">Report 12</a></li>
+                                        <li><a href="Report13.aspx">Report 13</a></li>
+                                       
+                                </ul>
+                            </li>
+                            <li><a href="ChangePassword.aspx" >Password<i style="padding:2px; margin-left:2px"></i></a>
+                                 
+                            </li>
+
+                        
+                        <%  } else if (userRole == 2) {  %>
+                                
+                                    <li><a href="#" >Movies<i class="fa fa-angle-down" style="padding:2px; margin-left:2px"></i></a>
+                                    <ul>
+                                        <li><a href="AddActors.aspx">Actors</a></li>
+                                        <li><a href="AddProducer.aspx">Producers</a></li>
+                                        <li><a href="AddStudio.aspx">Studios</a></li>
+                                        <li><a href="AddMovies.aspx">Add Movies</a></li>
+                                        <li><a href="AllMovies.aspx">All Movies</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#" >Member<i class="fa fa-angle-down" style="padding:2px; margin-left:2px"></i></a>
+                                    <ul>
+                                        <li><a href="AddMember.aspx">Members</a></li>
+                                        <li><a href="AddMembershipCategory.aspx">Categories</a></li>
+                        
+                                    </ul>
+                                </li>
+
+                                    <%--<li><a href="#" >Stock<i class="fa fa-angle-down" style="padding:2px; margin-left:2px"></i></a>
+                                    <ul>
+                                        <li><a href="AddDVDStock.aspx">Add/View Stock</a></li>
+                       
+                        
+                                    </ul>
+                                </li>--%>
+
+                                    <li><a href="#" >Loan<i class="fa fa-angle-down" style="padding:2px; margin-left:2px"></i></a>
+                                    <ul>
+                                        <li><a href="LoanHistory.aspx">Loan History</a></li>
+                                        <li><a href="LoanType.aspx">Loan Type</a></li>
+                                        <li><a href="AddDVDStock.aspx">Issue Loans</a></li>
+                                        <li><a href="Report7.aspx">Return DVD</a></li>
+                        
+                                    </ul>
+                                </li>
+                                     
+                                <li><a href="#" >Reports<i class="fa fa-angle-down" style="padding:2px; margin-left:2px"></i></a>
+                                <ul>
+                                    <li><a href="Report3.aspx">Report 3</a></li>
+                                    <li><a href="Report5.aspx">Report 5</a></li>
+                                    <li><a href="Report8.aspx">Report 8</a></li>
+                                    <li><a href="Report10.aspx">Report 10</a></li>
+                                    <li><a href="Report11.aspx">Report 11</a></li>
+                                    <li><a href="Report12.aspx">Report 12</a></li>
+                                    <li><a href="Report13.aspx">Report 13</a></li>
+                                       
+                                </ul>
+                                </li>
+                                <li><a href="#" >Manage<i class="fa fa-angle-down" style="padding:2px; margin-left:2px"></i></a>
+                                <ul>
+                                    <li><a href="Assistants.aspx">Assistants</a></li>
+                                    <li><a href="Managers.aspx">Managers</a></li>
+                                    
+                                </ul>
+                                </li>
+
+                    <%--  --%>
+                                    
+                                
+
+                    <%  
+                            }
+                    }
+                %>
+               
+
+                
+        </ul>
+    </div>
+    <div class="clear"></div>
+       
+        <div class="content">
+            <asp:ContentPlaceHolder ID="contentBody" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <div class="clear"></div>
+        <div class="footer">
+            <h2>Copyright&copy;Sujan Poudel | Indra Karki</h2>
+        </div>
+    </div>
+
+</form>
+</body>
+</html>
+
